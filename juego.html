@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego Canvas</title>
+   <h3><a href="index.html">REGRESAR</a></h3>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    canvas {
+      background: #222;
+      border: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="game" width="600" height="400"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const jugador = {
+  x: 275,
+  y: 350,
+  width: 50,
+  height: 20,
+  velocidad: 6
+};
+
+const estrella = {
+  x: Math.random() * 580,
+  y: 0,
+  size: 15,
+  velocidad: 3
+};
+
+let puntos = 0;
+const teclas = {};
+
+// Detectar teclas
+document.addEventListener("keydown", e => {
+  teclas[e.key] = true;
+});
+
+document.addEventListener("keyup", e => {
+  teclas[e.key] = false;
+});
+
+function actualizar() {
+  // Movimiento
+  if (teclas["ArrowLeft"] && jugador.x > 0) {
+    jugador.x -= jugador.velocidad;
+  }
+
+  if (
+    teclas["ArrowRight"] &&
+    jugador.x + jugador.width < canvas.width
+  ) {
+    jugador.x += jugador.velocidad;
+  }
+
+  // Caída de la estrella
+  estrella.y += estrella.velocidad;
+
+  // Colisión
+  if (
+    estrella.y + estrella.size >= jugador.y &&
+    estrella.x >= jugador.x &&
+    estrella.x <= jugador.x + jugador.width
+  ) {
+    puntos++;
+    reiniciarEstrella();
+  }
+
+  // Si la estrella llega al suelo
+  if (estrella.y > canvas.height) {
+    reiniciarEstrella();
+  }
+}
+
+function reiniciarEstrella() {
+  estrella.x = Math.random() * (canvas.width - estrella.size);
+  estrella.y = -estrella.size;
+}
+
+function dibujar() {
+  // Limpiar pantalla
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Jugador
+  ctx.fillStyle = "#00aaff";
+  ctx.fillRect(
+    jugador.x,
+    jugador.y,
+    jugador.width,
+    jugador.height
+  );
+
+  // Estrella
+  ctx.fillStyle = "yellow";
+  ctx.beginPath();
+  ctx.arc(
+    estrella.x,
+    estrella.y,
+    estrella.size,
+    0,
+    Math.PI * 2
+  );
+  ctx.fill();
+
+  // Puntuación
+  ctx.fillStyle = "white";
+  ctx.font = "20px Arial";
+  ctx.fillText("Puntos: " + puntos, 20, 30);
+}
+
+function juego() {
+  actualizar();
+  dibujar();
+  requestAnimationFrame(juego);
+}
+
+juego();
+</script>
+
+</body>
+</html>
