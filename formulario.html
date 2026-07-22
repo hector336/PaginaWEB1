@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Acceso y Documentación de Atributos</title>
+</head>
+<body>
+
+    <main>
+        <!-- SECCIÓN 1: EL FORMULARIO HTML -->
+        <section>
+            <h2>Formulario de Inicio de Sesión</h2>
+            
+            <form action="/login" method="POST">
+                
+                <p>
+                    <label for="correo">Correo Electrónico:</label>
+                    <br>
+                    <input 
+                        type="email" 
+                        id="correo" 
+                        name="email" 
+                        required 
+                        placeholder="ejemplo@correo.com"
+                    >
+                </p>
+
+                <p>
+                    <label for="clave">Contraseña:</label>
+                    <br>
+                    <input 
+                        type="password" 
+                        id="clave" 
+                        name="password" 
+                        required 
+                        minlength="8" 
+                        maxlength="20"
+                        autocomplete="current-password" 
+                        placeholder="Escribe tu contraseña"
+                        title="La contraseña debe tener entre 8 y 20 caracteres"
+                    >
+                </p>
+
+                <p>
+                    <button type="submit">Ingresar</button>
+                </p>
+
+            </form>
+        </section>
+
+        <hr>
+
+
+        <!-- SECCIÓN 2: EXPLICACIÓN DE LOS ATRIBUTOS -->
+        <section>
+            <h2>Guía de Atributos Utilizados en la Página</h2>
+            
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th>Atributo</th>
+                        <th>Valor en el Ejemplo</th>
+                        <th>¿Qué hace exactamente?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>type</strong></td>
+                        <td>"password" / "email"</td>
+                        <td>Define el comportamiento del campo. "password" oculta el texto con puntos y "email" valida que el texto tenga una estructura de correo electrónico válida (ejemplo@dominio.com).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>id</strong></td>
+                        <td>"clave" / "correo"</td>
+                        <td>Es el identificador único del elemento. Sirve para enlazar el campo con su etiqueta &lt;label&gt; a través del atributo "for".</td>
+                    </tr>
+                    <tr>
+                        <td><strong>name</strong></td>
+                        <td>"password" / "email"</td>
+                        <td>Es el nombre de la variable que el servidor (backend) leerá para procesar los datos que el usuario escribió.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>required</strong></td>
+                        <td>(No requiere valor)</td>
+                        <td>Hace que el campo sea obligatorio. El navegador impedirá enviar el formulario si la casilla está vacía.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>placeholder</strong></td>
+                        <td>"Escribe tu contraseña"</td>
+                        <td>Muestra un texto sugerido de fondo gris claro dentro del cuadro, el cual desaparece automáticamente en cuanto el usuario empieza a escribir.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>minlength</strong></td>
+                        <td>"8"</td>
+                        <td>Establece el límite mínimo de caracteres obligatorios. Si el usuario escribe menos de 8 caracteres, el navegador mostrará un error.</td>
+                    </tr>
+                    <tr>
+
+                        <td><strong>maxlength</strong></td>
+                        <td>"20"</td>
+                        <td>Establece el límite máximo de caracteres permitidos. El navegador físicamente bloqueará el teclado e impedirá escribir más allá del número 20.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>autocomplete</strong></td>
+                        <td>"current-password"</td>
+                        <td>Le indica de forma explícita al navegador y a los gestores de contraseñas que este es el campo de la clave actual del usuario para que puedan auto-rellenarla de forma segura.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>title</strong></td>
+                        <td>"La contraseña debe tener..."</td>
+                        <td>Agrega una descripción emergente al pasar el mouse sobre el campo y personaliza el mensaje de error nativo del navegador si no se cumplen los requisitos de longitud.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</body>
+</html>
